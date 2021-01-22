@@ -19,6 +19,10 @@ const float CNVLTGAL = .264179f; //Conversion from liters to gallons
 void mpg();
 void mpgV2();
 void calcInf();
+void getEstPrc();
+float estPrc1Yr(float,float);
+void getLrgst3(float,float,float);
+void getLrgst2(float,float);
 //Execution Begins Here
 int main(int argc, char** argv) {
     //Initialize the Random Number Seed
@@ -36,7 +40,7 @@ int main(int argc, char** argv) {
     cout << "7. Fuel Efficiency Program (Modified #6) - Savitch Chapter 4\n";
     cout << "8. Inflation Rate Program - Savitch Chapter 4\n";
     cout << "9. Estimated Prices & Inflation Program (Modified #8) - Savitch Chapter 4\n";
-    cout << "10. Largest of 3 Float Arguments - Savitch Chapter 4\n";
+    cout << "10. The Largest of 3 Float Arguments - Savitch Chapter 4\n";
     cout << "11. Quit Menu\n";
     cout << "Enter an option: ";
     cin >> choice;
@@ -61,9 +65,9 @@ int main(int argc, char** argv) {
             }
                 case 2:{
                     //Declare Variables
-                    short days;        //# of days user entered
-                    float penny=0.01f,
-                          total=0.0f;  //Total Pay
+                    short days;            //# of days user entered
+                    unsigned int penny = 1,//Value of a penny which we'll divide by 100 later on
+                                 total = 0;//Total Pay
                     //Initialize or input i.e. set variable values
                     cout << "On day 1, user gets $0.01 and everyday after it doubles. This program calculates the total pay.\n";
                     cout << "Enter the number of days the user worked: ";
@@ -78,7 +82,7 @@ int main(int argc, char** argv) {
                         penny *= 2;
                     }
                     cout << fixed << setprecision(2);
-                    cout << "Pay = $" << total;
+                    cout << "Pay = $" << total/100.0;
                     break;
                     }
             case 3:{
@@ -166,6 +170,36 @@ int main(int argc, char** argv) {
                 calcInf();
                 break;
             }
+            case 9:{
+                //Display the outputs
+                cout << "This program calculates the inflation rate as well as the estimated\n";
+                cout << "prices in one and two years of an item.\n";
+                getEstPrc();
+                break;
+            }
+            case 10:{
+                //Declare Variables
+                float firNum,  //First Number by user
+                      secNum,  //Second Number by user
+                      thirNum; //Third Number by user
+                //Initialize or input i.e. set variable values
+                cout << "Enter 3 numbers and the largest of them will be displayed for\n";
+                cout << "a two parameter and three parameter function.\n";
+                cout << "Enter first number:\n";
+                cin >> firNum;
+                cout << endl;
+                cout << "Enter Second number:\n";
+                cin >> secNum;
+                cout << endl;
+                cout << "Enter third number:\n";
+                cin >> thirNum;
+                cout << endl;
+                //Display the outputs
+                getLrgst2(firNum,secNum);
+                cout << endl;
+                getLrgst3(firNum,secNum,thirNum);
+                break;
+            }
             default: cout << "Enter a valid option next time.";
             }//End of Switch Statement
     }
@@ -177,7 +211,7 @@ int main(int argc, char** argv) {
 //                              Function mpg for Prob 6:                            *
 //       Take the number of liters and miles for one car and return mpg             *
 //***********************************************************************************
-void mpg (){
+void mpg(){
     short liters, numMls;
     float mlsPrGl; //MPG given liters and # of miles the car can travel
     char again;    //Choose to repeat program or not
@@ -202,7 +236,7 @@ void mpg (){
 //                              Function mpgV2 for Prob 7:                          *
 //Take the number of liters and miles for two cars and return the most efficient car*
 //***********************************************************************************
-void mpgV2 (){
+void mpgV2(){
     short liters1, numMls1, liters2, numMls2; //Liters and # of Miles for 2 cars
     float mlsPrGl1, mlsPrGl2;                 //MPG given liters and # of miles the car can travel for 2 cars
     char again;                               //Choose to repeat program or not
@@ -256,4 +290,68 @@ void calcInf(){
         if (again == 'Y' || again == 'y')
             cout << endl;
     }while(again == 'Y' || again == 'y');
+}
+//************************************************************
+//                Function getEstPrc:                        *
+// Pass in the current price as well as the year-ago price   *
+// And get the inflation rate. Multiply that by the current  *
+// Price to get estimated price one and two years from now   *
+//************************************************************
+void getEstPrc(){
+    float curPrc,  //current price
+          prevPrc, //year-ago price
+          infRte,  //Inflation rate as a decimal
+          estPrc1, //Estimated price after one year
+          estPrc2; //Estimated price after two years
+    char  again;   //Option to repeat
+    do{
+        cout << "Enter current price:\n";
+        cin >> curPrc;
+        cout << "Enter year-ago price:\n";
+        cin >> prevPrc;
+        cout << fixed << setprecision(2);
+        infRte = ((curPrc - prevPrc) / prevPrc) * 100.0;
+        cout << "Inflation rate:" << setw(6) << infRte << "%\n\n";
+        estPrc1 = curPrc * (1 + infRte/100.0f);
+        estPrc2 = estPrc1 * (1 + infRte/100.0f);
+        cout << "Price in one year: $" << setw(4) << estPrc1 << endl;
+        cout << "Price in two year: $" << setw(4) << estPrc2 << endl << endl;
+        cout << "Again:\n";
+        cin >> again;
+        if (again == 'Y' || again == 'y')
+            cout << endl;
+    }while(again == 'Y' || again == 'y');
+}
+//*******************************************
+//          Function estPrc1Yr:             *
+//  Returns the price of an item in 1 year  *
+// Pass in current price and inflation rate *
+//    as arguments to use this function     *
+//   *Inflation rate should be a decimal    *
+//*******************************************
+float estPrc1Yr(float curPrc, float infRte){
+    float prc1Yr; //Price in one year
+    prc1Yr = curPrc * (1 + infRte);
+    return prc1Yr;
+}
+//*********************************
+//      Funtion getLrgst3:        *
+//determines the largest of 3 args*
+//*********************************
+void getLrgst3(float num1, float num2, float num3){
+    float largest;
+    largest = (num1>num2&&num1>num3?num1:
+              (num2>num1&&num2>num3?num2:num3));
+    cout << "Largest number from three parameter function:\n";
+    cout << largest << endl;
+}
+//*********************************
+//      Funtion getLrgst2:        *
+//determines the largest of 2 args*
+//*********************************
+void getLrgst2(float num1, float num2){
+    float largest;
+    largest = (num1>num2?num1:num2);
+    cout << "Largest number from two parameter function:\n";
+    cout << largest << endl;
 }
