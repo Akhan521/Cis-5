@@ -31,16 +31,16 @@ int main(int argc, char** argv) {
     int choice;
     //Initialize Variables
     cout << "\t\tMenu For Assignment 4\n";
-    cout << "1. Sum of Some Numbers Program - Gaddis Chapter 5\n";
-    cout << "2. Pay in Pennies Program - Gaddis Chapter 5\n";
-    cout << "3. Min/Max of a List of #s Program - Gaddis Chapter 5\n";
-    cout << "4. Rectangle Display Program - Gaddis Chapter 5\n";
-    cout << "5. Triangle Pattern Program - Gaddis Chapter 5\n";
-    cout << "6. MPG Program Using a Function - Savitch Chapter 4\n";
-    cout << "7. Fuel Efficiency Program (Modified #6) - Savitch Chapter 4\n";
-    cout << "8. Inflation Rate Program - Savitch Chapter 4\n";
-    cout << "9. Estimated Prices & Inflation Program (Modified #8) - Savitch Chapter 4\n";
-    cout << "10. The Largest of 3 Float Arguments - Savitch Chapter 4\n";
+    cout << "1. Sum of Some Numbers Program - Ga9EdC5P1\n";
+    cout << "2. Pay in Pennies Program - Ga9EdC5P7\n";
+    cout << "3. Min/Max of a List of #s Program - Ga9EdC5P13\n";
+    cout << "4. Rectangle Display Program - Ga9EdC5P22\n";
+    cout << "5. Triangle Pattern Program - Ga9EdC5P23\n";
+    cout << "6. MPG Program Using a Function - Sav9EdC4P1\n";
+    cout << "7. Fuel Efficiency Program (Modified #6) - Sav9EdC4P2\n";
+    cout << "8. Inflation Rate Program - Sav9EdC4P4\n";
+    cout << "9. Estimated Prices & Inflation Program (Modified #8) - Sav9EdC4P5\n";
+    cout << "10. The Largest of 3 Float Arguments - Sav9EdC4P9\n";
     cout << "11. Quit Menu\n";
     cout << "Enter an option: ";
     cin >> choice;
