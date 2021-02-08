@@ -2,8 +2,8 @@
  * File:   main.cpp
  * Author: Aamir
  * Created on February 6, 2021, 1:00 PM
- * Purpose: Searching and 5 player function-> LCR V.6
- * Added searching at the end and another function for 5 players
+ * Purpose: Searching, Sorting, and a 5 player function-> LCR V.7
+ * Linear searching + 2 diff sort funcs + another function for 5 players + defaulted args
  */
 
 //System Libraries
@@ -20,13 +20,14 @@ using namespace std;
 //Math, Science, Universal, Conversions, High Dimensioned Arrays
 
 //Function Prototypes
-void threeTrn(int [], bool &, int &);
+void threeTrn(int [],bool &, int &);
 void fiveTrn(int [], bool &, int &);
-void markSrt(int [], int);
-void cpyLst(int [], int [], int);
-void rnking3(int [], int [], int);
-void rnking5(int [], int [], int);
-bool linSrch(int [], int, int);
+void bublSrt(int [],int = 3);
+void selcSrt(int [],int = 5);
+void cpyLst(int [],int [], int);
+void rnking3(int [],int [], int = 3);
+void rnking5(int [],int [], int = 5);
+bool linSrch(int [],int, int);
 //Execution Begins Here
 int main(int argc, char** argv) {
     //Initialize the Random Number Seed
@@ -52,7 +53,7 @@ int main(int argc, char** argv) {
         do{
         threeTrn(tknCntr, win, mean);
         cpyLst(tknCntr,plcings,PLYRS);
-        markSrt(plcings,PLYRS);
+        bublSrt(plcings,PLYRS);
         cout<<"Ranking after round:\n";
         rnking3(plcings,tknCntr,PLYRS);
         cout<<endl;
@@ -83,7 +84,7 @@ int main(int argc, char** argv) {
         do{
         fiveTrn(tknCntr, win, mean);
         cpyLst(tknCntr,plcings,PLYRS);
-        markSrt(plcings,PLYRS);
+        selcSrt(plcings,PLYRS);
         cout<<"Ranking after round:\n";
         rnking5(plcings,tknCntr,PLYRS);
         cout<<endl;
@@ -442,15 +443,31 @@ void fiveTrn(int tknCntr[], bool &win, int &mean){
     mean = (sum+.5)/numDice; //Round up if the value is .5 off, so the rest is truncated
     cout<< "The mean value rolled was around = "<< mean<<endl;
 }
-void markSrt(int a[], int n){
-    for(int i=0;i<n-1;i++){
-        for(int j=i+1;j<n;j++){
-            if(a[i]<a[j]){      //Descending order 
-                a[i]=a[i]^a[j]; //In place swapping
-                a[j]=a[i]^a[j];
-                a[i]=a[i]^a[j];
+void bublSrt(int a[],int n){
+    bool swap;
+    do{
+        swap=false;
+        for(int i=0;i<n-1;i++){    //Loop to swap with first in List
+            if(a[i]<a[i+1]){       //Put the largest at top of List
+                a[i]=a[i]^a[i+1];  //In place Swap
+                a[i+1]=a[i]^a[i+1];//In place Swap
+                a[i]=a[i]^a[i+1];  //In place Swap
+                swap=true;
             }
         }
+    }while(swap);
+}
+void selcSrt(int a[],int n){
+    for(int i=0;i<n-1;i++){      //Loop for each position in List
+        int mindex=i;
+        for(int j=i+1;j<n;j++){  //Loop to swap with first in List
+            if(a[mindex]<a[j]){  //Put the largest at top of List
+                mindex=j;
+            }
+        }
+        int temp=a[i];
+        a[i]=a[mindex];
+        a[mindex]=temp;
     }
 }
 void cpyLst(int a[], int b[], int n){
