@@ -1,9 +1,8 @@
 /* 
  * File:   main.cpp
  * Author: Aamir
- * Created on February 6, 2021, 1:00 PM
- * Purpose: Searching, Sorting, and a 5 player function-> LCR V.7
- * Linear searching + 2 diff sort funcs + another function for 5 players + defaulted args and more
+ * Created on February 8, 2021, 6:00 PM
+ * Purpose: Using Vectors-> LCR V.7
  */
 
 //System Libraries
@@ -12,6 +11,7 @@
 #include <cstdlib>   //Rand # Generator
 #include <ctime>     //Time set to seed
 #include <fstream>   //File Library
+#include <vector>
 using namespace std;
 
 //User Libraries
@@ -20,17 +20,17 @@ using namespace std;
 //Math, Science, Universal, Conversions, High Dimensioned Arrays
 
 //Function Prototypes
-void threeTrn(int [],bool &, float &, int &); //3 player turn func
-void fiveTrn (int [],bool &, int &, int &);   //5 player turn func
-void bublSrt (int [],int = 3);                //Bubble Sort
-void selcSrt (int [],int = 5);                //Selection Sort
-void cpyLst  (int [],int [], int);            //Copies the contents of first list to second (used for sorting)
-void rnking3 (int [],int [], int = 3);        //Displays rankings for 3 players
-void rnking5 (int [],int [], int = 5);        //Displays rankings for 5 players
-bool linSrch (int [],int, int);               //Linear Search
+void threeTrn(vector<int>&,bool &,float &,int &); //3 player turn func
+void fiveTrn (vector<int>&,bool &,int &,int &);   //5 player turn func
+void bublSrt (vector<int>&,int = 3);                //Bubble Sort
+void selcSrt (vector<int>&,int = 5);                //Selection Sort
+void cpyLst  (vector<int>&,vector<int>&,int);            //Copies the contents of first list to second (used for sorting)
+void rnking3 (vector<int>&,vector<int>&,int = 3);        //Displays rankings for 3 players
+void rnking5 (vector<int>&,vector<int>&,int = 5);        //Displays rankings for 5 players
+bool linSrch (vector<int>&,int,int);               //Linear Search
  int srchVal ();                              //Prompts for a value to search for
-void dsply(fstream &, int [], int, float, int);//overloaded function for displaying info (mean is a float)
-void dsply(fstream &, int [], int, int, int);  //overloaded function for displaying info (mean is an int)
+void dsply(fstream &,vector<int>&,int,float,int);//overloaded function for displaying info (mean is a float)
+void dsply(fstream &,vector<int>&,int,int,int);  //overloaded function for displaying info (mean is an int)
 //Execution Begins Here
 int main(int argc, char** argv) {
     //Initialize the Random Number Seed
@@ -49,8 +49,8 @@ int main(int argc, char** argv) {
     //Display Outputs
     if(numPlyrs==3){ //play if there are 3 players
         const int PLYRS = 3;
-        int tknCntr[PLYRS]={3,3,3}; //Initialize all elements with 3 tokens
-        int plcings[PLYRS]={};      //Sorted Placings after each round (Copy of the Prev. list)
+        vector<int> tknCntr{3,3,3}; //Initialize all elements with 3 tokens
+        vector<int> plcings(PLYRS);      //Sorted Placings after each round (Copy of the Prev. list)
         int numDice = 0;   //Number of dice rolled throughout game
         bool win = false;  //Create a condition for the do-while
         float mean = 0.0f, //Holds the mean as a float (not that accurate because you can't have half a dice...)
@@ -66,8 +66,8 @@ int main(int argc, char** argv) {
         dsply(out,tknCntr,PLYRS,mean,numDice);
     }else if(numPlyrs==5){ //Play with 5 players
         const int PLYRS = 5;
-        int tknCntr[PLYRS]={3,3,3,3,3}; //Initialize all elements with 3 tokens
-        int plcings[PLYRS]={};          //Sorted Placings after each round (Copy of the Prev. list)
+        vector<int> tknCntr{3,3,3,3,3}; //Initialize all elements with 3 tokens
+        vector<int> plcings(PLYRS);          //Sorted Placings after each round (Copy of the Prev. list)
         int numDice = 0;   //Number of dice rolled throughout game
         bool win = false;  //Create a condition for the do-while
         int mean = 0,      //It has to be a whole number because you can't have half a dice or the like
@@ -88,7 +88,7 @@ int main(int argc, char** argv) {
     out.close();
     return 0;
 }
-void threeTrn(int tknCntr[], bool &win, float &mean, int &numDice){
+void threeTrn(vector<int> &tknCntr, bool &win, float &mean, int &numDice){
     int tknLim=3; //Token limit is 3 for when we check if we are above/below limit
     char die; 
     if(tknCntr[0]!=0){
@@ -200,7 +200,7 @@ void threeTrn(int tknCntr[], bool &win, float &mean, int &numDice){
     }
     }
 }
-void fiveTrn(int tknCntr[], bool &win, int &mean, int &numDice){
+void fiveTrn(vector<int> &tknCntr, bool &win, int &mean, int &numDice){
     int tknLim=3; //Token limit is 3 for when we check if we are above/below limit
     char die; 
     if(tknCntr[0]!=0){
@@ -408,7 +408,7 @@ void fiveTrn(int tknCntr[], bool &win, int &mean, int &numDice){
     }
     }
 }
-void bublSrt(int a[],int n){
+void bublSrt(vector<int> &a,int n){
     bool swap;
     do{
         swap=false;
@@ -422,7 +422,7 @@ void bublSrt(int a[],int n){
         }
     }while(swap);
 }
-void selcSrt(int a[],int n){
+void selcSrt(vector<int> &a,int n){
     for(int i=0;i<n-1;i++){      //Loop for each position in List
         int mindex=i;
         for(int j=i+1;j<n;j++){  //Loop to swap with first in List
@@ -435,13 +435,13 @@ void selcSrt(int a[],int n){
         a[mindex]=temp;
     }
 }
-void cpyLst(int a[], int b[], int n){
+void cpyLst(vector<int> &a, vector<int> &b, int n){
     for(int i=0;i<n;i++){
         b[i]=a[i];
     }
 }
 //For comparing the token cntrs and sorted plcings list and displaying appropriate players
-void rnking3(int a[], int b[], int n){
+void rnking3(vector<int> &a, vector<int> &b, int n){
     for(int i=0;i<n;i++){
         if(a[i]==b[0]&&a[i]==b[1]&&a[i]==b[2])cout<<"Player 1,2,& 3: ";
         else if(a[i]==b[1]&&a[i]==b[2])cout<<"Player 2 & 3: ";
@@ -454,7 +454,7 @@ void rnking3(int a[], int b[], int n){
         }
 }
 //For comparing the token cntrs and sorted plcings list and displaying appropriate players
-void rnking5(int a[], int b[], int n){
+void rnking5(vector<int> &a, vector<int> &b, int n){
     for(int i=0;i<n;i++){
         if(a[i]==b[0]&&a[i]==b[1]&&a[i]==b[2]&&a[i]==b[3]&&a[i]==b[4])cout<<"Player 1,2,3,4,& 5: ";
         else if(a[i]==b[0]&&a[i]==b[2]&&a[i]==b[3]&&a[i]==b[4])cout<<"Player 1,3,4,& 5: ";
@@ -489,7 +489,7 @@ void rnking5(int a[], int b[], int n){
         cout<<a[i]<<" token/s" <<endl;
         }
 }
-bool linSrch(int a[], int n, int val){
+bool linSrch(vector<int> &a, int n, int val){
     for(int i=0;i<n;i++){
         if(a[i]==val)
             return true;
@@ -504,7 +504,7 @@ int srchVal(){
         exit(EXIT_FAILURE); //Example of exit function used to terminate program if val is less than 0
     return val;
 }
-void dsply(fstream &out, int tknCntr[], int PLYRS, float mean, int numDice){
+void dsply(fstream &out, vector<int> &tknCntr, int PLYRS, float mean, int numDice){
     mean /= numDice;
     //Displaying & Sending mean to file
     cout<<fixed<<setprecision(2);
@@ -529,7 +529,7 @@ void dsply(fstream &out, int tknCntr[], int PLYRS, float mean, int numDice){
         out << val<<" was not found in the list.\n";
     }
 }
-void dsply(fstream &out, int tknCntr[], int PLYRS, int mean, int numDice){
+void dsply(fstream &out, vector<int> &tknCntr, int PLYRS, int mean, int numDice){
     mean /= numDice;
     //Displaying & Sending mean to file
     cout<< "The mean value rolled was around = "<< mean<<endl;

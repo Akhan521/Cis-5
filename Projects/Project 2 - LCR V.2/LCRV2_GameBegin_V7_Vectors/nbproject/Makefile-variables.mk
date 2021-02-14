@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=Cygwin-Windows
 CND_ARTIFACT_DIR_Debug=dist/Debug/Cygwin-Windows
-CND_ARTIFACT_NAME_Debug=lcrv2_gamebegin_v7
-CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/lcrv2_gamebegin_v7
+CND_ARTIFACT_NAME_Debug=lcrv2_gamebegin_v7_vectors
+CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/lcrv2_gamebegin_v7_vectors
 CND_PACKAGE_DIR_Debug=dist/Debug/Cygwin-Windows/package
-CND_PACKAGE_NAME_Debug=lcrv2gamebeginv7.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/lcrv2gamebeginv7.tar
+CND_PACKAGE_NAME_Debug=lcrv2gamebeginv7vectors.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/lcrv2gamebeginv7vectors.tar
 # Release configuration
 CND_PLATFORM_Release=Cygwin-Windows
 CND_ARTIFACT_DIR_Release=dist/Release/Cygwin-Windows
-CND_ARTIFACT_NAME_Release=lcrv2_gamebegin_v7
-CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/lcrv2_gamebegin_v7
+CND_ARTIFACT_NAME_Release=lcrv2_gamebegin_v7_vectors
+CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/lcrv2_gamebegin_v7_vectors
 CND_PACKAGE_DIR_Release=dist/Release/Cygwin-Windows/package
-CND_PACKAGE_NAME_Release=lcrv2gamebeginv7.tar
-CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/lcrv2gamebeginv7.tar
+CND_PACKAGE_NAME_Release=lcrv2gamebeginv7vectors.tar
+CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/lcrv2gamebeginv7vectors.tar
 #
 # include compiler specific variables
 #

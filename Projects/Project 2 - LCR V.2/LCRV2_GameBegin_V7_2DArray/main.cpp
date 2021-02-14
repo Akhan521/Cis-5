@@ -1,9 +1,8 @@
 /* 
  * File:   main.cpp
  * Author: Aamir
- * Created on February 6, 2021, 1:00 PM
- * Purpose: Searching, Sorting, and a 5 player function-> LCR V.7
- * Linear searching + 2 diff sort funcs + another function for 5 players + defaulted args and more
+ * Created on February 8, 2021, 4:00 PM
+ * Purpose: Using a 2D Array -> LCR V.7
  */
 
 //System Libraries

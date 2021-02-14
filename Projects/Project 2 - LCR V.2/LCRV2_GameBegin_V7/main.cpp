@@ -9,8 +9,10 @@
 //System Libraries
 #include <iostream>  //I/O Library
 #include <iomanip>   //Formatting Library
+#include <string>
 #include <cstdlib>   //Rand # Generator
 #include <ctime>     //Time set to seed
+#include <cmath>
 #include <fstream>   //File Library
 using namespace std;
 
@@ -47,14 +49,16 @@ int main(int argc, char** argv) {
     (numPlyrs==3||numPlyrs==5?numPlyrs:0); //Accepts 3 players or 5 and nothing else
     out.open(flnme,ios::out);
     //Display Outputs
+    for(int game=1;game<=2;game++){ //Play 2 games
     if(numPlyrs==3){ //play if there are 3 players
         const int PLYRS = 3;
         int tknCntr[PLYRS]={3,3,3}; //Initialize all elements with 3 tokens
         int plcings[PLYRS]={};      //Sorted Placings after each round (Copy of the Prev. list)
         int numDice = 0;   //Number of dice rolled throughout game
         bool win = false;  //Create a condition for the do-while
-        float mean = 0.0f, //Holds the mean as a float (not that accurate because you can't have half a dice...)
+        float mean = 0.0f, //Holds the mean as a float 
               val;         //Value to search for in the list of token counters after game ends
+        int beg = time(0);
         do{
         threeTrn(tknCntr, win, mean,numDice);
         cpyLst(tknCntr,plcings,PLYRS);
@@ -63,7 +67,13 @@ int main(int argc, char** argv) {
         rnking3(plcings,tknCntr,PLYRS);
         cout<<endl;
         }while(win==false);//Loop until a win occurs
+        int end = time(0);
+        cout<<"Number of possible combinations: "<<pow(6,3)<<endl;
+        out<<"Number of possible combinations: "<<pow(6,3)<<endl;
+        cout<<"Time Elapsed in Seconds: "<<end-beg<<endl;
+        out<<"Time Elapsed in Seconds: "<<end-beg<<endl;
         dsply(out,tknCntr,PLYRS,mean,numDice);
+        cin.ignore();
     }else if(numPlyrs==5){ //Play with 5 players
         const int PLYRS = 5;
         int tknCntr[PLYRS]={3,3,3,3,3}; //Initialize all elements with 3 tokens
@@ -72,6 +82,7 @@ int main(int argc, char** argv) {
         bool win = false;  //Create a condition for the do-while
         int mean = 0,      //It has to be a whole number because you can't have half a dice or the like
             val;           //Value to search for in the list of token counters after game ends
+        int beg = time(0);
         do{
         fiveTrn(tknCntr,win,mean,numDice);
         cpyLst(tknCntr,plcings,PLYRS);
@@ -80,9 +91,16 @@ int main(int argc, char** argv) {
         rnking5(plcings,tknCntr,PLYRS);
         cout<<endl;
         }while(win==false);//Loop until a win occurs
+        int end = time(0);
+        cout<<"Number of possible combinations: "<<pow(6,3)<<endl;
+        out<<"Number of possible combinations: "<<pow(6,3)<<endl;
+        cout<<"Time Elapsed in Seconds: "<<end-beg<<endl;
+        out<<"Time Elapsed in Seconds: "<<end-beg<<endl;
         dsply(out,tknCntr,PLYRS,mean,numDice);
+        cin.ignore();
     }
-    else cout<< "You need either 3 or 5 Players.";
+    else cout<< "You need either 3 or 5 Players.\n";
+    }
     //Exit the Program - Cleanup
     in.close();
     out.close();
@@ -467,6 +485,7 @@ void rnking5(int a[], int b[], int n){
         else if(a[i]==b[1]&&a[i]==b[3]&&a[i]==b[4])cout<<"Player 2,4,& 5: ";
         else if(a[i]==b[0]&&a[i]==b[1]&&a[i]==b[2])cout<<"Player 1,2,& 3: ";
         else if(a[i]==b[0]&&a[i]==b[1]&&a[i]==b[3])cout<<"Player 1,2,& 4: ";
+        else if(a[i]==b[0]&&a[i]==b[1]&&a[i]==b[4])cout<<"Player 1,2,& 5: ";
         else if(a[i]==b[0]&&a[i]==b[2]&&a[i]==b[3])cout<<"Player 1,3,& 4: ";
         else if(a[i]==b[0]&&a[i]==b[2]&&a[i]==b[4])cout<<"Player 1,3,& 5: ";
         else if(a[i]==b[0]&&a[i]==b[3]&&a[i]==b[4])cout<<"Player 1,4,& 5: ";
@@ -531,7 +550,7 @@ void dsply(fstream &out, int tknCntr[], int PLYRS, float mean, int numDice){
 }
 void dsply(fstream &out, int tknCntr[], int PLYRS, int mean, int numDice){
     mean /= numDice;
-    //Displaying & Sending mean to file
+    //Displaying & Sending info to file
     cout<< "The mean value rolled was around = "<< mean<<endl;
     out<< "The mean value rolled was around = "<< mean<<endl;
     //Sending Info to file
