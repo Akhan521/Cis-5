@@ -89,12 +89,12 @@ void print(const char a[][COLMAX],int row,int col){
 }
 int strcmp(char a[],char b[], const char replace[], const char with[]){
     const int ASCII=128;
-    int newOrder[ASCII]; //The ASCII indexed array 
+    int newOrder[ASCII]; //The ASCII indexed array used for comparisons
     for(int i=0;i<ASCII;i++){
         newOrder[i]=i;
     }
     for(int i=0;i<strlen(replace);i++){ //Swapping the with array elements with the replace array in the newOrder array 
-        char temp;
+        int temp;
         temp=newOrder[with[i]];
         newOrder[with[i]]=newOrder[replace[i]];
         newOrder[replace[i]]=temp;
