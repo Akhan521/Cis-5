@@ -74,7 +74,7 @@ void sort(char a[][COLMAX],int row,int col, const char replace[],const char with
     for(int i=0;i<row-1;i++){
         for(int j=i+1;j<row;j++){
             if(strcmp(a[i],a[j],replace,with)>0){
-                int temp[col];
+                char temp[col];
                 strcpy(temp,a[i]);
                 strcpy(a[i],a[j]);
                 strcpy(a[j],temp);
