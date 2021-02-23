@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=Cygwin-Windows
 CND_ARTIFACT_DIR_Debug=dist/Debug/Cygwin-Windows
-CND_ARTIFACT_NAME_Debug=assignment_3
-CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/assignment_3
+CND_ARTIFACT_NAME_Debug=sort2dchararray_newsortorder
+CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/sort2dchararray_newsortorder
 CND_PACKAGE_DIR_Debug=dist/Debug/Cygwin-Windows/package
-CND_PACKAGE_NAME_Debug=assignment3.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/assignment3.tar
+CND_PACKAGE_NAME_Debug=sort2dchararraynewsortorder.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/sort2dchararraynewsortorder.tar
 # Release configuration
 CND_PLATFORM_Release=Cygwin-Windows
 CND_ARTIFACT_DIR_Release=dist/Release/Cygwin-Windows
-CND_ARTIFACT_NAME_Release=assignment_3
-CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/assignment_3
+CND_ARTIFACT_NAME_Release=sort2dchararray_newsortorder
+CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/sort2dchararray_newsortorder
 CND_PACKAGE_DIR_Release=dist/Release/Cygwin-Windows/package
-CND_PACKAGE_NAME_Release=assignment3.tar
-CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/assignment3.tar
+CND_PACKAGE_NAME_Release=sort2dchararraynewsortorder.tar
+CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/sort2dchararraynewsortorder.tar
 #
 # include compiler specific variables
 #
