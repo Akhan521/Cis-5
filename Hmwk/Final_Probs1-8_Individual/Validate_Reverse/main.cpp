@@ -58,35 +58,39 @@ int main(int argc, char** argv) {
 }
 bool inRange(const char a[],unsigned short &n){
     int len = strlen(a);
-    if(len<=5){ //To see if its less than or equal to 5 digits long
+    if(len<=5){               //To see if its less than or equal to 5 digits long
         for(int i=0;i<len;i++){
             if(a[i]<'0'||a[i]>'9'){
                 return false; //If its not a #, return false
             }
         }
     }else{
-        //cout<<"Longer than 5 digits\n";
+        cout<<"Longer than 5 digits\n";
         return false; //If the digits array is longer than 5
-    } 
-    n = atoi(a);
-    if(n>=0&&n<=65535){
+    }
+    int mult = 1;     //To Keep track of when we have tens,hundreds,...
+    n=0;              //Initialize the variable with 0 to avoid errors
+    for(int i=len-1;i>=0;i--){ //Convert Char array to a single int
+        n+=(a[i]-'0')*mult;
+        mult*=10;
+    }
+    if(n>=0&&n<=65535){ //Test the range of an unsigned short
         return true;
     }
     return false;
 }
 bool reverse(unsigned short n,signed short &b){
     int reverse=0;  //Will hold the reversed number
-    while(n>0){     //Reverses the number
-        reverse=reverse*10+n%10;
-        n/=10;
+    int num = n;    //Used to reverse the number
+    while(num>0){   //Reverses the number
+        reverse=reverse*10+num%10;
+        num/=10;
     }
-    if(reverse>0&&reverse<10)reverse*=10000;          //If there's 1 digit, it should store as 5 digits by * 10000
-    else if(reverse>=10&&reverse<100)reverse*=1000;   //For two digits, add three more digits to reach 5
-    else if(reverse>=100&&reverse<1000)reverse*=100;  //For three digits, only 2 more are needed
-    else if(reverse>=1000&&reverse<10000)reverse*=10; //For 4 digits, one more is needed
-                                                      //Nothing needs to be done when you have 5 digits
-    //cout<<reverse<<endl;
-    if(reverse>=-32768&&reverse<=32767){
+    if(n>0&&n<10)reverse*=10000;         //If there's 1 digit, it should store as 5 digits by * 10000
+    else if(n>10&&n<100)reverse*=1000;   //For two digits, add three more digits to reach 5
+    else if(n>100&&n<1000)reverse*=100;  //For three digits, only 2 more are needed
+    else if(n>1000&&n<10000)reverse*=10; //For 4 digits, one more is needed
+    if(reverse>=-32768&&reverse<=32767){ //Test the range of a signed short
         b = reverse;
         return true;
     }
@@ -95,7 +99,7 @@ bool reverse(unsigned short n,signed short &b){
 short subtrct(signed short b,int m){
     short result = b;
     if(result>=1000){
-    result-=m;
+    result-=m; //Subtract by the inputted number
     }
     return result;
 }
